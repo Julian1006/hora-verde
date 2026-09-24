@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HoraVerde</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body class="{{ ahora.clase }}">
+
+<div class="pagina">
+
+    <h1>HoraVerde</h1>
+
+    <!-- Lo importante de todo: a que hora conviene gastar luz -->
+    <section class="consejo">
+        <p class="consejo-titulo">La mejor hora para poner la lavadora</p>
+        <p class="hora-grande">{{ mejor.hora }}</p>
+        <p class="consejo-detalle">
+            A esa hora la luz cuesta <strong>{{ mejor.gramos }}</strong> gramos de CO2
+            por kWh. La peor hora es a las <strong>{{ peor.hora }}</strong>,
+            con {{ peor.gramos }}.
+        </p>
+        <p class="ahorro">
+            Esperando te ahorras <strong>{{ ahorro }} gramos</strong> por cada kWh.
+        </p>
+    </section>
+
+    <!-- Como esta la luz en este momento -->
+    <section class="ahora">
+        <p class="etiqueta">Ahora mismo</p>
+        <p class="numero">{{ ahora.gramos }}</p>
+        <p class="unidad">gramos de CO2 por kWh</p>
+        <p class="nivel">La luz esta <strong>{{ ahora.nivel }}</strong></p>
+    </section>
+
+    <!-- El pronostico de las proximas 48 horas -->
+    <section class="pronostico">
+        <h2>Las proximas 48 horas</h2>
+        <div class="grafica">
+            {% for hora in horas %}
+                <div class="columna {{ hora.clase }}{% if hora.destacada %} destacada{% endif %}"
+                     title="{{ hora.hora }} &middot; {{ hora.gramos }} gramos">
+                    <div class="barra" style="height: {{ hora.alto }}%"></div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="ejes">
+            <span>{{ horas[0].hora }}</span>
+            <span>ahora + 48 h</span>
+            <span>{{ horas[-1].hora }}</span>
+        </div>
+        <p class="leyenda">
+            <span class="punto limpia"></span> limpia
+            <span class="punto normal"></span> normal
+            <span class="punto sucia"></span> sucia
+            <span class="separador">|</span>
+            la barra con raya es la mejor hora
+        </p>
+    </section>
+
+    <!-- De donde sale la luz en este momento -->
+    <section class="mezcla">
+        <h2>De donde viene ahora</h2>
+        <ul class="fuentes">
+            {% for nombre, porcentaje in mezcla %}
+                {% if porcentaje > 0 %}
+                    <li>
+                        <span class="fuente">{{ nombre }}</span>
+                        <span class="franja" style="width: {{ porcentaje }}%"></span>
+                        <span class="porcentaje">{{ porcentaje }} %</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+
+    <p class="pie">Datos de la Carbon Intensity API (Reino Unido)</p>
+
+</div>
+
+</body>
+</html>

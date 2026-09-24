@@ -1,0 +1,264 @@
+/* HoraVerde - los colores y el tamano de las letras */
+
+:root {
+    --fondo: #f4f6f4;
+    --texto: #223;
+    --apagado: #667;
+    --linea: #dde;
+    --tarjeta: #fff;
+
+    /* Los colores de lo limpia que esta la luz */
+    --muy-limpia: #1f7a4d;
+    --limpia: #2c7a52;
+    --normal: #c08a2e;
+    --sucia: #c2622b;
+    --muy-sucia: #a83a2a;
+
+    /* Este cambia segun como este la luz ahora mismo */
+    --acento: var(--normal);
+}
+
+/* El color de toda la pagina depende de como este la red en este momento */
+body.muy-limpia { --acento: var(--muy-limpia); }
+body.limpia     { --acento: var(--limpia); }
+body.normal     { --acento: var(--normal); }
+body.sucia      { --acento: var(--sucia); }
+body.muy-sucia  { --acento: var(--muy-sucia); }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+.pagina {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 36px 20px 60px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0 0 28px;
+}
+
+h2 {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--apagado);
+    margin: 0 0 14px;
+}
+
+/* ---------- el consejo, que es lo importante ---------- */
+
+.consejo {
+    background: var(--tarjeta);
+    border-top: 4px solid var(--acento);
+    border-radius: 4px;
+    padding: 26px 24px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+
+.consejo-titulo {
+    margin: 0;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--apagado);
+}
+
+.hora-grande {
+    font-size: 4.4rem;
+    font-weight: bold;
+    line-height: 1;
+    margin: 10px 0 14px;
+    color: var(--acento);
+    font-variant-numeric: tabular-nums;
+}
+
+.consejo-detalle {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.ahorro {
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--linea);
+    color: var(--apagado);
+}
+
+/* ---------- como esta la luz ahora ---------- */
+
+.ahora {
+    text-align: center;
+    margin-top: 34px;
+}
+
+.etiqueta {
+    margin: 0;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--apagado);
+}
+
+.numero {
+    font-size: 3.4rem;
+    font-weight: bold;
+    margin: 6px 0 0;
+    line-height: 1;
+    color: var(--acento);
+    font-variant-numeric: tabular-nums;
+}
+
+.unidad {
+    margin: 6px 0 0;
+    color: var(--apagado);
+    font-size: .9rem;
+}
+
+.nivel {
+    margin: 12px 0 0;
+}
+
+/* ---------- la grafica de 48 horas ---------- */
+
+.pronostico {
+    margin-top: 40px;
+}
+
+.grafica {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 150px;
+    padding: 0 2px;
+    border-bottom: 1px solid var(--linea);
+}
+
+.columna {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    min-width: 0;
+}
+
+.barra {
+    width: 100%;
+    background: var(--apagado);
+    border-radius: 1px 1px 0 0;
+}
+
+.columna.muy-limpia .barra { background: var(--muy-limpia); }
+.columna.limpia .barra     { background: var(--limpia); }
+.columna.normal .barra     { background: var(--normal); }
+.columna.sucia .barra      { background: var(--sucia); }
+.columna.muy-sucia .barra  { background: var(--muy-sucia); }
+
+/* La mejor hora lleva una raya encima para que se vea de un vistazo */
+.columna.destacada .barra {
+    box-shadow: 0 -4px 0 0 var(--texto);
+}
+
+.ejes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: .75rem;
+    color: var(--apagado);
+    font-variant-numeric: tabular-nums;
+}
+
+.leyenda {
+    margin-top: 14px;
+    font-size: .75rem;
+    color: var(--apagado);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.punto {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.punto.limpia { background: var(--limpia); }
+.punto.normal { background: var(--normal); }
+.punto.sucia  { background: var(--sucia); }
+
+.separador {
+    color: var(--linea);
+    margin: 0 2px;
+}
+
+/* ---------- de donde viene la luz ---------- */
+
+.mezcla {
+    margin-top: 40px;
+}
+
+.fuentes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fuentes li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 2px;
+    border-bottom: 1px solid var(--linea);
+}
+
+.fuente {
+    width: 5.5rem;
+    flex: none;
+}
+
+.franja {
+    height: 8px;
+    background: var(--acento);
+    border-radius: 2px;
+    opacity: .35;
+    max-width: 100%;
+}
+
+.porcentaje {
+    margin-left: auto;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    flex: none;
+}
+
+/* ---------- el pie ---------- */
+
+.pie {
+    margin-top: 44px;
+    text-align: center;
+    font-size: .75rem;
+    color: var(--apagado);
+}
+
+/* ---------- en el movil ---------- */
+
+@media (max-width: 480px) {
+    .hora-grande { font-size: 3.4rem; }
+    .grafica { height: 110px; }
+    .fuente { width: 4.6rem; font-size: .9rem; }
+}
